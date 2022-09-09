@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import TransactionsList from "../Transactions/TransactionsList";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTransactions} from "../../features/transaction/transactionSlice";
 import Transaction from "../Transactions/Transaction";
-import {Link} from "react-router-dom";
-import {Col, Form} from "react-bootstrap";
+import {Col, Form, Pagination} from "react-bootstrap";
 import {searchFilter, typeFilter} from "../../features/filter/filterSlice";
 
 const Transactions = () => {
     const dispatch = useDispatch();
     const [input, setInput] = useState('');
+
     const {transactions, isLoading, isError} = useSelector((state) => state.transaction);
     const {type, search} = useSelector((state) => state.filter);
+    const {page, limit} = useSelector(state => state.pagination);
 
     useEffect(() => {
-        dispatch(fetchTransactions({type, search}));
-    }, [dispatch, type, search]);
+        dispatch(fetchTransactions({type, search, page, limit}));
+    }, [dispatch, type, search, page, limit]);
 
     const handleTypeFilter = (e) => {
         dispatch(typeFilter(e.target.value))
@@ -24,6 +24,15 @@ const Transactions = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(searchFilter(input))
+    }
+
+    let items = [];
+    for (let number = 1; number <= 5; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number === page}>
+                {number}
+            </Pagination.Item>,
+        );
     }
 
     //decide what to show
@@ -38,17 +47,16 @@ const Transactions = () => {
         content = <p>No transactions found</p>;
     }
     if (!isLoading && !isError && transactions?.length > 0) {
-        content = [...transactions].reverse().map((transaction) => <Transaction key={transaction.id}
-                                                                                transaction={transaction}/>);
+        content = (
+            <>
+                {[...transactions].reverse().map((transaction) => (
+                    <Transaction key={transaction.id} transaction={transaction}/>
+                ))}
+                <Pagination className='justify-content-center w-100 mt-4'>{items}</Pagination>
+            </>
+        )
 
-        if (transactions?.length > 5) {
-            content = (
-                <>
-                    {content}
-                    <Link to={'/transactions'} className={'btn btn-primary'}>View All</Link>
-                </>
-            )
-        }
+
     }
 
     return (

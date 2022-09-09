@@ -27,7 +27,7 @@ export default function TransactionsList() {
         content = (
             <>
                 {[...transactions].reverse().slice(0, 5).map((transaction) => <Transaction key={transaction.id} transaction={transaction}/>)}
-                {transactions.length > 5 && <li style={{textAlign: 'center'}}><Link to={'/transactions'} className={'view-all-btn'}>View All</Link></li>}
+                {transactions.length > 5 && <li style={{textAlign: 'center'}}><Link to={'/transactions'} className={'btn btn-primary'}>View All</Link></li>}
             </>
         )
     }

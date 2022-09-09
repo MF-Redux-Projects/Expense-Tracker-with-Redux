@@ -13,7 +13,26 @@
     min-height: 100vh;
 }
 
-.header,
+.header{
+    padding: 20px;
+    background-color: #4338ca;
+    color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header nav ul{
+    display: flex;
+    list-style: none;
+}
+.header nav ul li{
+    margin: 0 10px;
+}
+.header nav ul li a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 20px;
+}
 .footer {
     padding: 20px;
     text-align: center;
@@ -70,10 +89,6 @@
 
 .radio {
     grid-template-columns: 1fr 1fr 1fr;
-}
-
-input {
-    padding: 5px 10px;
 }
 
 .btn {

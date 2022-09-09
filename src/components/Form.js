@@ -1,6 +1,7 @@
 import {createTransaction, updateTransaction} from "../features/transaction/transactionSlice";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {Form as BoostrapForm, Button} from "react-bootstrap";
 
 export default function Form() {
     const [name, setName] = useState('');
@@ -70,7 +71,7 @@ export default function Form() {
             <form action="" onSubmit={editMode ? handleUpdate : handleCreate}>
                 <div className="form-group">
                     <label>Name</label>
-                    <input
+                    <BoostrapForm.Control
                         type="text"
                         name="name"
                         placeholder="Enter title"
@@ -109,7 +110,7 @@ export default function Form() {
 
                 <div className="form-group">
                     <label>Amount</label>
-                    <input
+                    <BoostrapForm.Control
                         type="number"
                         placeholder="Enter amount"
                         name="amount"
@@ -119,13 +120,13 @@ export default function Form() {
                     />
                 </div>
 
-                <button className="btn" disabled={isLoading}>
+                <Button variant="primary" className={'mb-3'} disabled={isLoading}>
                     {editMode ? 'Update Transaction' : 'Add Transaction'}
-                </button>
+                </Button>
                 {!isLoading && isError && <p className='error'>There was an error occured</p>}
             </form>
 
-            {editMode && <button className="btn cancel_edit" onClick={handleCancelEdit}>Cancel Edit</button>}
+            {editMode && <Button variant="danger" onClick={handleCancelEdit}>Cancel Edit</Button>}
         </div>
     );
 }

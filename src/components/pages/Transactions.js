@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchTransactions} from "../../features/transaction/transactionSlice";
 import Transaction from "../Transactions/Transaction";
 import {Link} from "react-router-dom";
+import {Form} from "react-bootstrap";
 
 const Transactions = () => {
     const dispatch = useDispatch();
@@ -38,8 +39,38 @@ const Transactions = () => {
     }
     return (
         <>
-            <div className={'transaction-header'}>
-
+            <div className={'transaction-header d-flex justify-content-between align-items-center'}>
+                <div className="transaction-type-filter">
+                    <div>
+                        <Form.Check
+                            inline
+                            label="All"
+                            name="type"
+                            type='radio'
+                            id={`type-all`}
+                            value={'all'}
+                        />
+                        <Form.Check
+                            inline
+                            label="Income"
+                            name="type"
+                            type='radio'
+                            id={`type-income`}
+                            value={'income'}
+                        />
+                        <Form.Check
+                            inline
+                            label="Expense"
+                            name="type"
+                            type='radio'
+                            id={`type-expense`}
+                            value={'expense'}
+                        />
+                    </div>
+                </div>
+                <div className="transaction-search">
+                    <Form.Control type="text" placeholder="Search transactions" />
+                </div>
             </div>
             <div className="conatiner_of_list_of_transactions">
                 {content}

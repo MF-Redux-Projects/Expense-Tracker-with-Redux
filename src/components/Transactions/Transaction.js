@@ -18,9 +18,9 @@ export default function Transaction({transaction}) {
 
     return (
         <li className={`transaction ${type}`}>
-            <p>{name}</p>
+            <p className={'m-0'}>{name}</p>
             <div className="right">
-                <p>৳ {numberWithCommas(amount)}</p>
+                <p className={'m-0'}>৳ {numberWithCommas(amount)}</p>
                 <button className="link" onClick={handleEdit}>
                     <img alt="Edit" className="icon" src={editImage} />
                 </button>

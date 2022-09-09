@@ -40,22 +40,6 @@
     color: whitesmoke;
 }
 
-.main {
-    flex-grow: 1;
-    display: flex;
-}
-
-.container {
-    width: 90%;
-    max-width: 1024px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-}
-
 .top_card {
     background-color: #4338ca;
     color: white;

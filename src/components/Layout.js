@@ -17,7 +17,7 @@ export default function Layout({ children }) {
                 </nav>
             </div>
 
-            <div className="main">
+            <div className="main py-5">
                 <div className="container">{children}</div>
             </div>
 

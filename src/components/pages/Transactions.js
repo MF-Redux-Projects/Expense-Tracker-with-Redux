@@ -4,14 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchTransactions} from "../../features/transaction/transactionSlice";
 import Transaction from "../Transactions/Transaction";
 import {Link} from "react-router-dom";
-import {Form} from "react-bootstrap";
-import {typeFilter} from "../../features/filter/filterSlice";
+import {Col, Form} from "react-bootstrap";
+import {searchFilter, typeFilter} from "../../features/filter/filterSlice";
 
 const Transactions = () => {
     const dispatch = useDispatch();
-    const [search, setSearch] = useState('');
+    const [input, setInput] = useState('');
     const {transactions, isLoading, isError} = useSelector((state) => state.transaction);
-    const {type} = useSelector((state) => state.filter);
+    const {type, search} = useSelector((state) => state.filter);
 
     useEffect(() => {
         dispatch(fetchTransactions({type, search}));
@@ -19,6 +19,11 @@ const Transactions = () => {
 
     const handleTypeFilter = (e) => {
         dispatch(typeFilter(e.target.value))
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(searchFilter(input))
     }
 
     //decide what to show
@@ -48,47 +53,52 @@ const Transactions = () => {
 
     return (
         <>
-            <div className={'transaction-header d-flex justify-content-between align-items-center mb-4'}>
-                <div className="transaction-type-filter">
-                    <Form.Check
-                        inline
-                        label="All"
-                        name="type"
-                        type='radio'
-                        id={`type-all`}
-                        value={'all'}
-                        checked={type === 'all'}
-                        onChange={handleTypeFilter}
-                    />
-                    <Form.Check
-                        inline
-                        label="Income"
-                        name="type"
-                        type='radio'
-                        id={`type-income`}
-                        value={'income'}
-                        checked={type === 'income'}
-                        onChange={handleTypeFilter}
-                    />
-                    <Form.Check
-                        inline
-                        label="Expense"
-                        name="type"
-                        type='radio'
-                        id={`type-expense`}
-                        value={'expense'}
-                        checked={type === 'expense'}
-                        onChange={handleTypeFilter}
-                    />
-                </div>
-                <div className="transaction-search">
-                    <Form.Control
-                        type="text"
-                        placeholder="Search transactions"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
-                </div>
+            <div className={'transaction-header mb-4'}>
+                <Form className={'row align-items-center'} onSubmit={handleSubmit}>
+                    <Col xs={12} md={6}>
+                        <div className="transaction-type-filter">
+                            <Form.Check
+                                inline
+                                label="All"
+                                name="type"
+                                type='radio'
+                                id={`type-all`}
+                                value={'all'}
+                                checked={type === 'all'}
+                                onChange={handleTypeFilter}
+                            />
+                            <Form.Check
+                                inline
+                                label="Income"
+                                name="type"
+                                type='radio'
+                                id={`type-income`}
+                                value={'income'}
+                                checked={type === 'income'}
+                                onChange={handleTypeFilter}
+                            />
+                            <Form.Check
+                                inline
+                                label="Expense"
+                                name="type"
+                                type='radio'
+                                id={`type-expense`}
+                                value={'expense'}
+                                checked={type === 'expense'}
+                                onChange={handleTypeFilter}
+                            />
+                        </div>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Form.Control
+                            className={'w-100'}
+                            type="text"
+                            placeholder="Search transactions"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                        />
+                    </Col>
+                </Form>
             </div>
             <div className="conatiner_of_list_of_transactions">
                 {content}

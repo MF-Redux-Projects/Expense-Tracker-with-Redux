@@ -39,7 +39,7 @@ const Transactions = () => {
     }
     return (
         <>
-            <div className={'transaction-header d-flex justify-content-between align-items-center'}>
+            <div className={'transaction-header d-flex justify-content-between align-items-center mb-4'}>
                 <div className="transaction-type-filter">
                     <div>
                         <Form.Check

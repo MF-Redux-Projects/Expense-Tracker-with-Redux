@@ -1,8 +1,15 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getTransactions, addTransaction, editTransaction, deleteTransaction} from "./transactionAPI";
+import {
+    getTransactions,
+    getTotalTransactions,
+    addTransaction,
+    editTransaction,
+    deleteTransaction
+} from "./transactionAPI";
 
 const initialState = {
     transactions: [],
+    transactionCount: 0,
     isLoading: false,
     isError: false,
     error: '',
@@ -13,6 +20,11 @@ const initialState = {
 export const fetchTransactions = createAsyncThunk('transaction/fetchTransactions', async ({type, search, page, limit}) => {
     const transactions = await getTransactions({type, search, page, limit});
     return transactions;
+});
+
+export const fetchTotalTransactions = createAsyncThunk('transaction/fetchTotalTransactions', async ({type, search}) => {
+    const transactions = await getTotalTransactions({type, search});
+    return transactions.length;
 });
 
 export const createTransaction = createAsyncThunk('transaction/addTransaction', async (data) => {
@@ -58,6 +70,21 @@ const transactionSlice = createSlice({
                 state.isError = true;
                 state.error = action.error?.message;
                 state.transactions = [];
+            })
+            .addCase(fetchTotalTransactions.pending, (state) => {
+                state.isLoading = true;
+                state.isError = false;
+            })
+            .addCase(fetchTotalTransactions.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.transactionCount = action.payload;
+            })
+            .addCase(fetchTotalTransactions.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.error = action.error?.message;
+                state.transactionCount = 0;
             })
             .addCase(createTransaction.pending, (state) => {
                 state.isLoading = true;

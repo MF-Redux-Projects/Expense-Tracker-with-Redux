@@ -3,6 +3,7 @@ import editImage from "../../assets/images/edit.svg";
 import {useDispatch} from "react-redux";
 import {editActive, removeTransaction} from "../../features/transaction/transactionSlice";
 import numberWithCommas from "../../utils/numberWithCommas";
+import {setPage} from "../../features/pagination/paginationSlice";
 
 export default function Transaction({transaction}) {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function Transaction({transaction}) {
 
     const handleDelete = () => {
         dispatch(removeTransaction(id));
+        dispatch(setPage(1));
     }
 
     return (

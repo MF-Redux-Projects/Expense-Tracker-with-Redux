@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchTransactions} from "../../features/transaction/transactionSlice";
+import {fetchTotalTransactions, fetchTransactions} from "../../features/transaction/transactionSlice";
 import Transaction from "../Transactions/Transaction";
-import {Col, Form, Pagination} from "react-bootstrap";
+import {Col, Form} from "react-bootstrap";
 import {searchFilter, typeFilter} from "../../features/filter/filterSlice";
+import ExpensePagination from "../ExpensePagination";
+import {setPage} from "../../features/pagination/paginationSlice";
 
 const Transactions = () => {
     const dispatch = useDispatch();
@@ -15,24 +17,18 @@ const Transactions = () => {
 
     useEffect(() => {
         dispatch(fetchTransactions({type, search, page, limit}));
+        dispatch(fetchTotalTransactions({type, search}));
     }, [dispatch, type, search, page, limit]);
 
     const handleTypeFilter = (e) => {
         dispatch(typeFilter(e.target.value))
+        dispatch(setPage(1));
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(searchFilter(input))
-    }
-
-    let items = [];
-    for (let number = 1; number <= 5; number++) {
-        items.push(
-            <Pagination.Item key={number} active={number === page}>
-                {number}
-            </Pagination.Item>,
-        );
+        dispatch(setPage(1));
     }
 
     //decide what to show
@@ -46,13 +42,14 @@ const Transactions = () => {
     if (!isLoading && !isError && transactions?.length === 0) {
         content = <p>No transactions found</p>;
     }
+
     if (!isLoading && !isError && transactions?.length > 0) {
         content = (
             <>
                 {[...transactions].reverse().map((transaction) => (
                     <Transaction key={transaction.id} transaction={transaction}/>
                 ))}
-                <Pagination className='justify-content-center w-100 mt-4'>{items}</Pagination>
+                <ExpensePagination/>
             </>
         )
 
@@ -60,7 +57,7 @@ const Transactions = () => {
     }
 
     return (
-        <>
+        <div className={'w-100'}>
             <div className={'transaction-header mb-4'}>
                 <Form className={'row align-items-center'} onSubmit={handleSubmit}>
                     <Col xs={12} md={6}>
@@ -111,7 +108,7 @@ const Transactions = () => {
             <div className="conatiner_of_list_of_transactions">
                 {content}
             </div>
-        </>
+        </div>
     );
 };
 

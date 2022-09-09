@@ -18,7 +18,7 @@ export default function Layout({ children }) {
             </div>
 
             <div className="main py-5">
-                <div className="container">{children}</div>
+                <div className="container d-flex flex-column align-items-center">{children}</div>
             </div>
 
             <div className="footer">&copy;2022 Learn with Sumit</div>

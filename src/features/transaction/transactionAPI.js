@@ -18,6 +18,18 @@ export const getTransactions = async ({type, search, page, limit}) => {
     return response.data;
 }
 
+export const getTotalTransactions = async ({type, search}) => {
+    let queryString = '';
+    if(type !== '' && type !== 'all'){
+        queryString += `type=${type}`;
+    }
+    if(search !== ''){
+        queryString += `&q=${search}`;
+    }
+    const response = await axios.get(`/transactions?${queryString}`);
+    return response.data;
+}
+
 export const addTransaction = async (data) => {
     const response = await axios.post('/transactions', data);
     return response.data;

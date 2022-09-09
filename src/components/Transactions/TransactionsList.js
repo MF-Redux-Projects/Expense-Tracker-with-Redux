@@ -1,15 +1,16 @@
 import Transaction from "./Transaction";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchTransactions} from "../../features/transaction/transactionSlice";
+import {fetchTotalTransactions, fetchTransactions} from "../../features/transaction/transactionSlice";
 import {Link} from "react-router-dom";
 
 export default function TransactionsList() {
     const dispatch = useDispatch();
-    const {transactions, isLoading, isError} = useSelector((state) => state.transaction);
+    const {transactions,transactionCount, isLoading, isError} = useSelector((state) => state.transaction);
 
     useEffect(() => {
-        dispatch(fetchTransactions());
+        dispatch(fetchTransactions({'type': '', 'search': '','page': '', 'limit': ''}));
+        dispatch(fetchTotalTransactions({'type': '', 'search': ''}));
     }, [dispatch]);
 
     //decide what to show
@@ -27,7 +28,7 @@ export default function TransactionsList() {
         content = (
             <>
                 {[...transactions].reverse().slice(0, 5).map((transaction) => <Transaction key={transaction.id} transaction={transaction}/>)}
-                {transactions.length > 5 && <li style={{textAlign: 'center'}}><Link to={'/transactions'} className={'btn btn-primary'}>View All</Link></li>}
+                {transactionCount > 5 && <li style={{textAlign: 'center'}}><Link to={'/transactions'} className={'btn btn-primary'}>View All</Link></li>}
             </>
         )
     }

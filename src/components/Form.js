@@ -1,7 +1,7 @@
 import {createTransaction, updateTransaction} from "../features/transaction/transactionSlice";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Form as BoostrapForm, Button} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 
 export default function Form() {
     const [name, setName] = useState('');
@@ -32,7 +32,6 @@ export default function Form() {
             setEditMode(false)
         }
     }, [editing]);
-
 
     const handleCreate = (e) => {
         e.preventDefault();
@@ -71,7 +70,8 @@ export default function Form() {
             <form action="" onSubmit={editMode ? handleUpdate : handleCreate}>
                 <div className="form-group">
                     <label>Name</label>
-                    <BoostrapForm.Control
+                    <input
+                        className={'form-control'}
                         type="text"
                         name="name"
                         placeholder="Enter title"
@@ -110,7 +110,8 @@ export default function Form() {
 
                 <div className="form-group">
                     <label>Amount</label>
-                    <BoostrapForm.Control
+                    <input
+                        className={'form-control'}
                         type="number"
                         placeholder="Enter amount"
                         name="amount"
@@ -120,13 +121,13 @@ export default function Form() {
                     />
                 </div>
 
-                <Button variant="primary" className={'mb-3'} disabled={isLoading}>
+                <button className={'btn btn-primary'} disabled={isLoading}>
                     {editMode ? 'Update Transaction' : 'Add Transaction'}
-                </Button>
+                </button>
                 {!isLoading && isError && <p className='error'>There was an error occured</p>}
             </form>
 
-            {editMode && <Button variant="danger" onClick={handleCancelEdit}>Cancel Edit</Button>}
+            {editMode && <button className={'btn cancel_edit'} onClick={handleCancelEdit}>Cancel Edit</button>}
         </div>
     );
 }

@@ -17,9 +17,7 @@ export default function Layout({ children }) {
                 </nav>
             </div>
 
-            <div className="main py-5">
-                <div className="container d-flex flex-column align-items-center">{children}</div>
-            </div>
+            {children}
 
             <div className="footer">&copy;2022 Learn with Sumit</div>
         </div>

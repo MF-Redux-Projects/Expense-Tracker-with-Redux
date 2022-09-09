@@ -6,7 +6,7 @@ import {Col, Form as BootstrapForm} from "react-bootstrap";
 import {searchFilter, typeFilter} from "../../features/filter/filterSlice";
 import ExpensePagination from "../ExpensePagination";
 import {setPage} from "../../features/pagination/paginationSlice";
-import Form from "../Form";
+import TransactionForm from "../TransactionForm";
 
 const Transactions = () => {
     const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const Transactions = () => {
 
 
     }
-    console.log(editing)
+
     return (
         <div className={'w-100'}>
             <div className={'transaction-header mb-4'}>
@@ -105,7 +105,7 @@ const Transactions = () => {
                         />
                     </Col>
                 </BootstrapForm>
-                {editing?.id && <Form/>}
+                {editing?.id && <TransactionForm/>}
             </div>
             <div className="conatiner_of_list_of_transactions">
                 {content}

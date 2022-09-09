@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "react-bootstrap";
 
-export default function Form() {
+export default function TransactionForm() {
     const [name, setName] = useState('');
     const [amount, setAmount] = useState();
     const [type, setType] = useState('income');

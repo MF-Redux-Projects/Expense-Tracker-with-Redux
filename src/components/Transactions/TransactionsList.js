@@ -28,7 +28,7 @@ export default function TransactionsList() {
         content = (
             <>
                 {[...transactions].reverse().slice(0, 5).map((transaction) => <Transaction key={transaction.id} transaction={transaction}/>)}
-                {transactionCount > 5 && <li style={{textAlign: 'center'}}><Link to={'/transactions'} className={'btn btn-primary'}>View All</Link></li>}
+                {transactionCount > 5 && <div className={'text-center mt-4'}><Link to={'/transactions'} className={'btn btn-primary d-inline-block w-auto px-5 py-2'}>View All</Link></div>}
             </>
         )
     }
@@ -36,9 +36,9 @@ export default function TransactionsList() {
         <>
             <p className="second_heading">Your Transactions:</p>
             <div className="conatiner_of_list_of_transactions">
-                <ul>
+                <div>
                     {content}
-                </ul>
+                </div>
             </div>
         </>
     );

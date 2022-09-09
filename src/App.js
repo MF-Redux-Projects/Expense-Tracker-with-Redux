@@ -1,5 +1,3 @@
-import Balance from "./components/Balance";
-import Form from "./components/Form";
 import Layout from "./components/Layout";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./components/pages/Home";

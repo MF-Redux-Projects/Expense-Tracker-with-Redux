@@ -19,7 +19,7 @@ export default function Transaction({transaction}) {
     }
 
     return (
-        <li className={`transaction ${type}`}>
+        <div className={`transaction ${type}`}>
             <p className={'m-0'}>{name}</p>
             <div className="right">
                 <p className={'m-0'}>৳ {numberWithCommas(amount)}</p>
@@ -30,6 +30,6 @@ export default function Transaction({transaction}) {
                     <img alt="Delete" className="icon" src={deleteImage} />
                 </button>
             </div>
-        </li>
+        </div>
     );
 }

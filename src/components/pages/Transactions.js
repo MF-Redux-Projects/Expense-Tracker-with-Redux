@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTotalTransactions, fetchTransactions} from "../../features/transaction/transactionSlice";
 import Transaction from "../Transactions/Transaction";
-import {Col, Form as BootstrapForm} from "react-bootstrap";
+import {Col, Form as BootstrapForm, Row} from "react-bootstrap";
 import {searchFilter, typeFilter} from "../../features/filter/filterSlice";
 import ExpensePagination from "../ExpensePagination";
 import {setPage} from "../../features/pagination/paginationSlice";
@@ -58,57 +58,63 @@ const Transactions = () => {
     }
 
     return (
-        <div className={'w-100'}>
-            <div className={'transaction-header mb-4'}>
-                <BootstrapForm className={'row align-items-center'} onSubmit={handleSubmit}>
-                    <Col xs={12} md={6}>
-                        <div className="transaction-type-filter">
-                            <BootstrapForm.Check
-                                inline
-                                label="All"
-                                name="type"
-                                type='radio'
-                                id={`type-all`}
-                                value={'all'}
-                                checked={type === 'all'}
-                                onChange={handleTypeFilter}
-                            />
-                            <BootstrapForm.Check
-                                inline
-                                label="Income"
-                                name="type"
-                                type='radio'
-                                id={`type-income`}
-                                value={'income'}
-                                checked={type === 'income'}
-                                onChange={handleTypeFilter}
-                            />
-                            <BootstrapForm.Check
-                                inline
-                                label="Expense"
-                                name="type"
-                                type='radio'
-                                id={`type-expense`}
-                                value={'expense'}
-                                checked={type === 'expense'}
-                                onChange={handleTypeFilter}
-                            />
+        <div className="main py-5">
+            <div className="container">
+                <Row className={'justify-content-center'}>
+                    <Col md={8}>
+                        <div className={'transaction-header mb-4'}>
+                            <BootstrapForm className={'row align-items-center'} onSubmit={handleSubmit}>
+                                <Col xs={12} md={6}>
+                                    <div className="transaction-type-filter">
+                                        <BootstrapForm.Check
+                                            inline
+                                            label="All"
+                                            name="type"
+                                            type='radio'
+                                            id={`type-all`}
+                                            value={'all'}
+                                            checked={type === 'all'}
+                                            onChange={handleTypeFilter}
+                                        />
+                                        <BootstrapForm.Check
+                                            inline
+                                            label="Income"
+                                            name="type"
+                                            type='radio'
+                                            id={`type-income`}
+                                            value={'income'}
+                                            checked={type === 'income'}
+                                            onChange={handleTypeFilter}
+                                        />
+                                        <BootstrapForm.Check
+                                            inline
+                                            label="Expense"
+                                            name="type"
+                                            type='radio'
+                                            id={`type-expense`}
+                                            value={'expense'}
+                                            checked={type === 'expense'}
+                                            onChange={handleTypeFilter}
+                                        />
+                                    </div>
+                                </Col>
+                                <Col xs={12} md={6}>
+                                    <BootstrapForm.Control
+                                        className={'w-100'}
+                                        type="text"
+                                        placeholder="Search transactions"
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                    />
+                                </Col>
+                            </BootstrapForm>
+                            {editing?.id && <TransactionForm/>}
+                        </div>
+                        <div className="conatiner_of_list_of_transactions">
+                            {content}
                         </div>
                     </Col>
-                    <Col xs={12} md={6}>
-                        <BootstrapForm.Control
-                            className={'w-100'}
-                            type="text"
-                            placeholder="Search transactions"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                        />
-                    </Col>
-                </BootstrapForm>
-                {editing?.id && <TransactionForm/>}
-            </div>
-            <div className="conatiner_of_list_of_transactions">
-                {content}
+                </Row>
             </div>
         </div>
     );

@@ -10,8 +10,8 @@ const initialState = {
 }
 
 //async thunks
-export const fetchTransactions = createAsyncThunk('transaction/fetchTransactions', async ({type, search}) => {
-    const transactions = await getTransactions({type, search});
+export const fetchTransactions = createAsyncThunk('transaction/fetchTransactions', async ({type, search, page, limit}) => {
+    const transactions = await getTransactions({type, search, page, limit});
     return transactions;
 });
 

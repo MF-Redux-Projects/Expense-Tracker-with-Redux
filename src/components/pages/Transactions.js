@@ -2,16 +2,17 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTotalTransactions, fetchTransactions} from "../../features/transaction/transactionSlice";
 import Transaction from "../Transactions/Transaction";
-import {Col, Form} from "react-bootstrap";
+import {Col, Form as BootstrapForm} from "react-bootstrap";
 import {searchFilter, typeFilter} from "../../features/filter/filterSlice";
 import ExpensePagination from "../ExpensePagination";
 import {setPage} from "../../features/pagination/paginationSlice";
+import Form from "../Form";
 
 const Transactions = () => {
     const dispatch = useDispatch();
     const [input, setInput] = useState('');
 
-    const {transactions, isLoading, isError} = useSelector((state) => state.transaction);
+    const {transactions, isLoading, isError, editing} = useSelector((state) => state.transaction);
     const {type, search} = useSelector((state) => state.filter);
     const {page, limit} = useSelector(state => state.pagination);
 
@@ -55,14 +56,14 @@ const Transactions = () => {
 
 
     }
-
+    console.log(editing)
     return (
         <div className={'w-100'}>
             <div className={'transaction-header mb-4'}>
-                <Form className={'row align-items-center'} onSubmit={handleSubmit}>
+                <BootstrapForm className={'row align-items-center'} onSubmit={handleSubmit}>
                     <Col xs={12} md={6}>
                         <div className="transaction-type-filter">
-                            <Form.Check
+                            <BootstrapForm.Check
                                 inline
                                 label="All"
                                 name="type"
@@ -72,7 +73,7 @@ const Transactions = () => {
                                 checked={type === 'all'}
                                 onChange={handleTypeFilter}
                             />
-                            <Form.Check
+                            <BootstrapForm.Check
                                 inline
                                 label="Income"
                                 name="type"
@@ -82,7 +83,7 @@ const Transactions = () => {
                                 checked={type === 'income'}
                                 onChange={handleTypeFilter}
                             />
-                            <Form.Check
+                            <BootstrapForm.Check
                                 inline
                                 label="Expense"
                                 name="type"
@@ -95,7 +96,7 @@ const Transactions = () => {
                         </div>
                     </Col>
                     <Col xs={12} md={6}>
-                        <Form.Control
+                        <BootstrapForm.Control
                             className={'w-100'}
                             type="text"
                             placeholder="Search transactions"
@@ -103,7 +104,8 @@ const Transactions = () => {
                             onChange={(e) => setInput(e.target.value)}
                         />
                     </Col>
-                </Form>
+                </BootstrapForm>
+                {editing?.id && <Form/>}
             </div>
             <div className="conatiner_of_list_of_transactions">
                 {content}

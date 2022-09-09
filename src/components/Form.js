@@ -1,4 +1,4 @@
-import {createTransaction, updateTransaction} from "../features/transaction/transactionSlice";
+import {clearActive, createTransaction, updateTransaction} from "../features/transaction/transactionSlice";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "react-bootstrap";
@@ -54,6 +54,7 @@ export default function Form() {
                 type,
             }
         }));
+        dispatch(clearActive());
         resetForm();
         setEditMode(false);
     }
@@ -61,11 +62,12 @@ export default function Form() {
     const handleCancelEdit = () => {
         resetForm();
         setEditMode(false);
+        dispatch(clearActive());
     }
 
     return (
         <div className="form">
-            <h3>Add new transaction</h3>
+            <h3>{editMode ? 'Update' : 'Add new'} transaction</h3>
 
             <form action="" onSubmit={editMode ? handleUpdate : handleCreate}>
                 <div className="form-group">

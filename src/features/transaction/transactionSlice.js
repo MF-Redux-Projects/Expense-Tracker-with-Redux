@@ -50,7 +50,7 @@ const transactionSlice = createSlice({
         editActive: (state, action) => {
             state.editing = action.payload;
         },
-        editInActive: (state) => {
+        clearActive: (state) => {
             state.editing = {};
         }
     },
@@ -134,4 +134,4 @@ const transactionSlice = createSlice({
 });
 
 export default transactionSlice.reducer;
-export const {editActive, editInActive} = transactionSlice.actions;
+export const {editActive, clearActive} = transactionSlice.actions;

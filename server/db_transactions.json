@@ -1,16 +1,40 @@
 {
   "transactions": [
     {
-      "name": "Foysal",
-      "amount": 1000,
+      "id": 1,
+      "name": "Salary from Google",
       "type": "income",
-      "id": 1
+      "amount": 1000000
     },
     {
-      "name": "mehedifoysal",
-      "amount": 100,
+      "id": 2,
+      "name": "Family Expenses",
       "type": "expense",
-      "id": 2
+      "amount": 200000
+    },
+    {
+      "name": "Foysal",
+      "amount": 10,
+      "type": "income",
+      "id": 3
+    },
+    {
+      "name": "first-name",
+      "amount": 345,
+      "type": "income",
+      "id": 5
+    },
+    {
+      "name": "mehedi",
+      "amount": 1345,
+      "type": "expense",
+      "id": 7
+    },
+    {
+      "name": "Foysal",
+      "amount": 232,
+      "type": "income",
+      "id": 8
     }
   ]
 }

@@ -1,16 +1,17 @@
-import Transaction from "./Transaction";
+import React, {useEffect} from 'react';
+import TransactionsList from "../Transactions/TransactionsList";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
 import {fetchTransactions} from "../../features/transaction/transactionSlice";
+import Transaction from "../Transactions/Transaction";
+import {Link} from "react-router-dom";
 
-export default function Transactions() {
+const Transactions = () => {
     const dispatch = useDispatch();
     const {transactions, isLoading, isError} = useSelector((state) => state.transaction);
 
     useEffect(() => {
         dispatch(fetchTransactions());
     }, [dispatch]);
-
     //decide what to show
     let content;
     if (isLoading) {
@@ -23,17 +24,28 @@ export default function Transactions() {
         content = <p>No transactions found</p>;
     }
     if (!isLoading && !isError && transactions?.length > 0) {
-        content = transactions.map((transaction) => <Transaction key={transaction.id} transaction={transaction} />);
+        content = [...transactions].reverse().map((transaction) => <Transaction key={transaction.id}
+                                                                                transaction={transaction}/>);
+
+        if (transactions?.length > 5) {
+            content = (
+                <>
+                    {content}
+                    <Link to={'/transactions'} className={'btn btn-primary'}>View All</Link>
+                </>
+            )
+        }
     }
     return (
         <>
-            <p className="second_heading">Your Transactions:</p>
+            <div className={'transaction-header'}>
 
+            </div>
             <div className="conatiner_of_list_of_transactions">
-                <ul>
-                    {content}
-                </ul>
+                {content}
             </div>
         </>
     );
-}
+};
+
+export default Transactions;

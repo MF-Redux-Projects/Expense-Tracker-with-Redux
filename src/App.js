@@ -1,15 +1,20 @@
 import Balance from "./components/Balance";
 import Form from "./components/Form";
 import Layout from "./components/Layout";
-import Transactions from "./components/Transactions/Transactions";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Home from "./components/pages/Home";
+import Transactions from "./components/pages/Transactions";
 
 function App() {
     return (
-        <Layout>
-            <Balance />
-            <Form />
-            <Transactions />
-        </Layout>
+        <BrowserRouter>
+            <Layout>
+                <Routes>
+                    <Route path={''} element={<Home/>}/>
+                    <Route path={'/transactions'} element={<Transactions/>}/>
+                </Routes>
+            </Layout>
+        </BrowserRouter>
     );
 }
 

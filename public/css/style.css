@@ -176,13 +176,24 @@ label {
     text-align: left;
 }
 
-.conatiner_of_list_of_transactions ul {
-    max-height: 500px;
-    overflow-y: auto;
-}
 .error{
     color: red;
 }
+
+.view-all-btn{
+    margin: 20px 0;
+    background-color: #4338ca;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    display: inline-block;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
 @media (max-width: 450px) {
     .top_card,
     .form {

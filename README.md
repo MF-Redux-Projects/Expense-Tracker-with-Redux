@@ -8,7 +8,6 @@
 
 #### Project Features:
 
-- [x] Expense Tracker with Redux
 - [x] User can add new transaction with title, transaction amount and transaction type
 - [x] User can delete transaction
 - [x] User can edit transaction

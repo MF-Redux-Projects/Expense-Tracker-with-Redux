@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://lws-fake-product-api.herokuapp.com/",
+    baseURL: "https://mf-redux.onrender.com",
 })
 
 export default axiosInstance;

@@ -8,17 +8,18 @@
 
 #### Project Features:
 
-- [x] Video list
-- [x] Video details
-- [x] Related videos
-- [x] Video pagination
-- [x] User can search by title
-- [x] User can filter video by clicking on category
-- [x] User can filter video by clicking on author
-- [x] User can clear filter
+- [x] Expense Tracker with Redux
+- [x] User can add new transaction with title, transaction amount and transaction type
+- [x] User can delete transaction
+- [x] User can edit transaction
+- [x] User can filter transaction by type
+- [x] User can search transaction by title
+- [x] User can see their current balance
 
 #### Packages Use
 - [x] [React](https://reactjs.org/)
+- [x] [React Bootstrap](https://react-bootstrap.github.io/)
+- [x] [Axios](https://axios-http.com/docs/intro)
 - [x] [Redux](https://redux.js.org/)
 - [x] [React Redux](https://react-redux.js.org/)
 - [x] [Testing Library - Jest Dom](https://testing-library.com/docs/ecosystem-jest-dom/)
